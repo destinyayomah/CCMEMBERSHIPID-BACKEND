@@ -1,4 +1,4 @@
-import express, { response } from 'express';
+import express from 'express';
 import bodyParser from 'body-parser';
 import connectDB from './utils/connectDB.js';
 import dotenv from 'dotenv';
@@ -19,7 +19,6 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 
 app.get('/', (req, res) => {
-
     res.send({ message: "Welcome to the coin class membership id api" });
 });
 
