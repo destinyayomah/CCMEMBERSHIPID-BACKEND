@@ -22,18 +22,18 @@ app.get('/', (req, res) => {
     res.send({ message: "Welcome to the coin class membership id api" });
 });
 
-// app.get('*', (req, res) => {
-//         res.status(400).send({ message: 'The endpoint you tried to access doesn\'t exist on this api' });
-//     })
-//     .post('*', (req, res) => {
-//         res.status(400).send({ message: 'The endpoint you tried to access doesn\'t exist on this api' });
-//     })
-//     .patch('*', (req, res) => {
-//         res.status(400).send({ message: 'The endpoint you tried to access doesn\'t exist on this api' });
-//     })
-//     .delete('*', (req, res) => {
-//         res.status(400).send({ message: 'The endpoint you tried to access doesn\'t exist on this api' });
-//     });
+app.get('*', (req, res) => {
+        res.status(400).send({ message: 'The endpoint you tried to access doesn\'t exist on this api' });
+    })
+    .post('*', (req, res) => {
+        res.status(400).send({ message: 'The endpoint you tried to access doesn\'t exist on this api' });
+    })
+    .patch('*', (req, res) => {
+        res.status(400).send({ message: 'The endpoint you tried to access doesn\'t exist on this api' });
+    })
+    .delete('*', (req, res) => {
+        res.status(400).send({ message: 'The endpoint you tried to access doesn\'t exist on this api' });
+    });
 
 connectDB();
 
