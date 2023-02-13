@@ -49,26 +49,28 @@ const registerUser = async(req, res) => {
             let result = true;
 
             if (value === 'Superadmin') { result = false; }
-
-            console.log(result);
         }, 'Superadmin already exists');
 
         bcrypt.hash(req.body.password, 10, (err, hash) => {
-            if (err) { res.status(422).send({ error: err }); return false; }
+            if (err) { res.status(422).send({ error: 'failed data parse handling' }); return false; }
 
             user.password = hash;
         });
 
-        user.save((err, result) => {
-            if (err) { res.status(422).send({ error: err }); return false; }
+        if (user.password) {
+            user.save((err, result) => {
+                if (err) { res.status(422).send({ error: err }); return false; }
 
-            const token = jwt.sign({
-                id: result._id,
-                email: result.email
-            }, process.env.SECRET);
+                const token = jwt.sign({
+                    id: result._id,
+                    email: result.email
+                }, process.env.SECRET);
 
-            res.status(201).send({ message: "User registered", token });
-        });
+                res.status(201).send({ message: "User registered", token });
+            });
+        }
+
+
     } catch (e) {
         res.status(404).send({ error: e.message });
     }

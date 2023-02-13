@@ -16,8 +16,7 @@ export const userSchema = new mongoose.Schema({
     },
     username: {
         type: String,
-        required: [true, 'username is required'],
-        unique: true,
+        required: [true, 'username is required']
     },
     password: {
         type: String,
@@ -27,7 +26,6 @@ export const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        unique: true,
         required: [true, 'email address is required'],
         validate: [validateEmail, 'Please fill a valid email address'],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
