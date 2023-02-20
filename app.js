@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import userRouter from './routes/userRoute/main.js';
 import loginRouter from './routes/loginRoute/main.js';
 import registerRouter from './routes/registerRoute/main.js';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors({ origin: "*" }));
 
 app.use('/user', userRouter);
 app.use('/login', loginRouter);
@@ -23,8 +25,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-        res.status(400).send({ message: 'The endpoint you tried to access doesn\'t exist on this api' });
-    })
+    res.status(400).send({ message: 'The endpoint you tried to access doesn\'t exist on this api' });
+})
     .post('*', (req, res) => {
         res.status(400).send({ message: 'The endpoint you tried to access doesn\'t exist on this api' });
     })
