@@ -31,8 +31,7 @@ export const userSchema = new mongoose.Schema({
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     gender: {
-        type: String,
-        enum: ['Male', 'Female']
+        type: String
     },
     occupation: {
         type: String
@@ -59,22 +58,18 @@ export const userSchema = new mongoose.Schema({
     selfie_photo: {
         type: String
     },
-    administrator_field: {
+    start_date: {
         type: String,
     },
     administrator: {
-        type: String,
-        enum: ['Regional administrator', 'Branch manager', 'Regular member', 'Not yet an administrator'],
+        type: String
     },
-    management_position: {
-        type: String,
-        enum: ['Chairman/deputy chairman', 'Secretary/deputy secretary', 'Treasurer/deputy treasurer', 'Field head', 'Not yet a member'],
+    tunas: {
+        type: String
     },
-    last_education: {
-        type: String,
-        enum: ['Middle school', 'High School', 'Bachelor\'s degree', 'Master\'s degree'],
+    place_implementation_buds: {
+        type: String
     },
-    files: String,
     role: {
         type: String,
         enum: ['Superadmin', 'Admin', 'User'],

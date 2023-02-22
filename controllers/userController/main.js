@@ -44,7 +44,7 @@ export const updateAUser = async(req, res) => {
             req.body.password = password;
         }
 
-        User.findOneAndUpdate({ _id: req.params.uid }, req.body, (err, user) => {
+        User.findOneAndUpdate({ _id: req.params.uid }, req.body, (err, user) => { 
             if (err) { res.status(422).send({ error: err.errors }); return false; }
 
             if (!user) { res.status(404).send({ message: "User not found" }); return false; }
