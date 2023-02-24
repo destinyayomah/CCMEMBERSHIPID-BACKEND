@@ -3,10 +3,10 @@ import { showAUser, showAllUsers, showAUserByToken, updateAUser, deleteAUser } f
 
 const userRouter = Router();
 
+userRouter.get('/token', showAUserByToken);
 userRouter.get('/:uid', showAUser);
-userRouter.get('/token/:uid', showAUserByToken);
 userRouter.get('/', showAllUsers);
 userRouter.patch('/:uid', updateAUser);
 userRouter.delete('/:uid', deleteAUser);
 
-export default userRouter;
+export default userRouter; 

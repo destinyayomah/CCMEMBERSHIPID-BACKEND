@@ -70,7 +70,7 @@ export const showAUserByToken = async (req, res) => {
 
         if (!user.id) { res.status(404).send({ message: 'invalid token' }); }
 
-        User.findOne({ _id: req.params.uid }, (err, user) => {
+        User.findOne({ _id: user.id }, (err, user) => {
             if (err) { res.send({ error: err.message }); return false; }
 
             if (!user) { res.status(404).send({ message: "User not found" }); return false; }
