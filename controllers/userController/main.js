@@ -31,9 +31,13 @@ export const showAUser = async (req, res) => {
 
 export const updateAUser = async (req, res) => {
     try {
-        const { token } = req.body;
+        const { authorization } = req.headers;
 
-        if (!token) { res.status(404).send({ message: 'token required' }); return false; }
+        if (!authorization) { res.status(404).send({ message: 'token required' }); return false; }
+
+        if (!authorization.includes('Bearer ')) { res.status(404).send({ message: 'invalid token' }); return false; }
+
+        const token = authorization.split('Bearer ')[1];
 
         const user = jwt.verify(token, process.env.SECRET);
 
@@ -45,11 +49,11 @@ export const updateAUser = async (req, res) => {
         }
 
         User.findOneAndUpdate({ _id: req.params.uid }, req.body, (err, user) => {
-            if (err) { res.status(422).send({ error: err.errors }); return false; }
+            if (err) { res.status(422).send({ error: err }); return false; }
 
             if (!user) { res.status(404).send({ message: "User not found" }); return false; }
 
-            res.status(200).send({ message: "User updated" });
+            res.status(200).send({ message: "User updated", userDTO: user });
         });
     } catch (e) {
         res.status(404).send({ error: e.message });
