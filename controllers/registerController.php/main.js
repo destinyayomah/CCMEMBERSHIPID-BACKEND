@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const registerUser = async(req, res) => {
+const registerUser = async (req, res) => {
     try {
         const user = new User({
             fullname: req.body.fullname,
@@ -34,18 +34,18 @@ const registerUser = async(req, res) => {
             date_joined: todayDate()
         });
 
-        userSchema.path('email').validate(async(value) => {
+        userSchema.path('email').validate(async (value) => {
             const emailCount = await mongoose.models.User.countDocuments({ email: value });
             return !emailCount;
         }, 'email already exists');
 
-        userSchema.path('username').validate(async(value) => {
+        userSchema.path('username').validate(async (value) => {
             const usernameCount = await mongoose.models.User.countDocuments({ username: value });
 
             return !usernameCount;
         }, 'username already exists');
 
-        userSchema.path('role').validate(async(value) => {
+        userSchema.path('role').validate(async (value) => {
             let result = true;
 
             if (value === 'Superadmin') { result = false; }
@@ -59,7 +59,17 @@ const registerUser = async(req, res) => {
 
         if (user.password) {
             user.save((err, result) => {
-                if (err) { res.status(422).send({ error: err }); return false; }
+                if (err) {
+                    const errors = [];
+
+                    for (const key in err.errors) {
+                        if (err.errors.hasOwnProperty(key)) {
+                            errors.push(err.errors[key].message);
+                        }
+                    }
+
+                    res.status(422).json({ errors }); return false;
+                }
 
                 const token = jwt.sign({
                     id: result._id,

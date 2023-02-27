@@ -7,12 +7,32 @@ dotenv.config();
 const login = async(req, res) => {
     try {
         User.findOne({ username: req.body.username }, (err, user) => {
-            if (err) { res.status(404).send({ err }); return false; }
+            if (err) {
+                const errors = [];
+
+                for (const key in err.errors) {
+                    if (err.errors.hasOwnProperty(key)) {
+                        errors.push(err.errors[key].message);
+                    }
+                }
+
+                res.status(422).json({ errors }); return false;
+            }
 
             if (!user) { res.status(404).send({ message: 'Invalid credentials' }); return false; }
 
             bcrypt.compare(req.body.password, user.password, (err, result) => {
-                if (err) { res.status(404).send({ err }); return false; }
+                if (err) {
+                    const errors = [];
+    
+                    for (const key in err.errors) {
+                        if (err.errors.hasOwnProperty(key)) {
+                            errors.push(err.errors[key].message);
+                        }
+                    }
+    
+                    res.status(422).json({ errors }); return false;
+                }
 
                 if (!result) { res.status(404).send({ message: 'Invalid credentials' }); return false; }
 
