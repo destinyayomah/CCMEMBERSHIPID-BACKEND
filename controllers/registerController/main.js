@@ -19,6 +19,8 @@ const registerUser = async (req, res) => {
             phone: req.body.phone,
             province: req.body.province,
             district: req.body.district,
+            sub_district: req.body.sub_district,
+            village: req.body.village,
             facebook: req.body.facebook,
             twitter: req.body.twitter,
             graduate_at: req.body.graduate_at,
@@ -79,8 +81,6 @@ const registerUser = async (req, res) => {
                 res.status(201).send({ message: "User registered", token });
             });
         }
-
-
     } catch (e) {
         res.status(404).send({ error: e.message });
     }

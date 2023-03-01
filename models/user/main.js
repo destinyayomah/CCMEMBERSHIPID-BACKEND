@@ -41,12 +41,10 @@ export const userSchema = new mongoose.Schema({
         minLength: 7,
         maxLength: 15
     },
-    province: {
-        type: String
-    },
-    district: {
-        type: String
-    },
+    province: String,
+    district: String,
+    sub_district: String,
+    village: String,
     facebook: String,
     twitter: String,
     graduate_at: {
