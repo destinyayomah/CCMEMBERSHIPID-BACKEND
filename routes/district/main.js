@@ -9,9 +9,9 @@ const districtRouter = Router();
 districtRouter
     .get('/:id', getADistrict)
     .get('/', getAllDistrict)
+    .post('/multiple', jsonParser, deleteMultipleDistrict)
     .post('/', createDistrict)
     .patch('/:id', updateADistrict)
-    .delete('/multiple', jsonParser, deleteMultipleDistrict)
     .delete('/:id', deleteADistrict);
 
 export default districtRouter;

@@ -9,9 +9,9 @@ const villageRouter = Router();
 villageRouter
     .get('/:id', getAVillage)
     .get('/', getAllVillage)
+    .post('/multiple', jsonParser, deleteMultipleVillage)
     .post('/', createVillage)
     .patch('/:id', updateAVillage)
-    .delete('/multiple', jsonParser, deleteMultipleVillage)
     .delete('/:id', deleteAVillage);
 
 export default villageRouter;

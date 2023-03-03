@@ -16,9 +16,9 @@ const subDistrictRouter = Router();
 subDistrictRouter
     .get('/:id', getASubDistrict)
     .get('/', getAllSubDistrict)
+    .post('/multiple', jsonParser, deleteMultipleSubDistrict)
     .post('/', createSubDistrict)
     .patch('/:id', updateASubDistrict)
-    .delete('/multiple', jsonParser, deleteMultipleSubDistrict)
     .delete('/:id', deleteASubDistrict)
 
 export default subDistrictRouter;
